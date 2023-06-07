@@ -31,7 +31,7 @@ SECRET_KEY = get_random_secret_key()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = get_list(os.environ.get("ALLOWED_HOSTS", "localhost,"))
 
 # Application definition
 
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "corsheaders",
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = get_list(
     os.environ.get("ALLOWED_CLIENT_HOSTS", "http://localhost:4200")
 )
@@ -158,3 +159,5 @@ SIMPLE_JWT = {
     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
     "TOKEN_TYPE_CLAIM": "token_type",
 }
+
+APPEND_SLASH = False

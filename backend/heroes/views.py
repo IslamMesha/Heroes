@@ -3,13 +3,18 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenObtainPairView
 
-from heroes.models import Hero
+from heroes.models import Hero, Rate
 from heroes.serializers import (
     HeroCreateSerializer,
     HeroListSerializer,
-    HeroRetrieveSerializer,
+    HeroRetrieveSerializer, LoginSerializer, RateSerializer,
 )
+
+
+class LoginView(TokenObtainPairView):
+    serializer_class = LoginSerializer
 
 
 class LogoutView(APIView):
@@ -72,3 +77,14 @@ class HeroRetrieveAPIView(generics.RetrieveAPIView):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly,
     ]
+
+
+class RateHeroAPIView(generics.CreateAPIView):
+    queryset = Rate.objects.all()
+    serializer_class = RateSerializer
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+
+    def perform_create(self, serializer):
+        serializer.save(by=self.request.user)
