@@ -19,6 +19,12 @@
 4. (Optional) Access the admin site: [http://localhost:8000/admin/](http://localhost:8000/admin/)
 5. (Optional) Run the tests: `python manage.py test`
 
+## Docker
+
+1. Build the image: `docker build -t [image-name] .`
+2. Run the container: `docker run -p 8000:8000 [image-name]`
+3. Go to [http://localhost:8000/](http://localhost:8000/) in your browser
+
 ## Contributing
 
 If you'd like to contribute to [Heroes App], please follow these steps:
