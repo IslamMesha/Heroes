@@ -1,0 +1,10 @@
+<div class="row justify-content-center align-items-center vh-100">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">Add new Hero</div>
+      <div class="card-body">
+        <app-heroes-form [formGroup]="formGroup" (formSubmitted)="onSubmit($event)"></app-heroes-form>
+      </div>
+    </div>
+  </div>
+</div>

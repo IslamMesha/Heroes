@@ -1,0 +1,14 @@
+<div class="heroes p-5 mt-5 bg-white">
+  <div class="mb-3 d-flex align-items-center justify-content-between">
+    <div class="heroes--search">
+      <div class="col-xs-3 col-sm-auto">
+        <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" placeholder="Search by name or power" />
+      </div>
+    </div>
+    <div class="heroes--add-new">
+      <button class="btn btn-primary" *ngIf="userData?.is_superuser" [routerLink]="['/heroes/add']">Add Hero</button>
+    </div>
+  </div>
+
+  <app-heroes-list-table [heroes]="heroes" [filter]="filter" (onRateChanged)="rateChanged($event)"></app-heroes-list-table>
+</div>

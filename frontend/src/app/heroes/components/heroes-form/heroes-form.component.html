@@ -1,0 +1,21 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <div class="form-group mb-4 has-validation">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" formControlName="name"
+      [class.is-invalid]="name.touched && name.errors?.['required']">
+    <div class="invalid-feedback" *ngIf="name.touched && name.errors?.['required']">
+      Hero name is required.
+    </div>
+  </div>
+  <div class="form-group mb-4 has-validation">
+    <label for="power">Power</label>
+    <input type="power" class="form-control" id="power" formControlName="power"
+      [class.is-invalid]="power.touched && power.errors?.['required']">
+    <div class="invalid-feedback" *ngIf="power.touched && power.errors?.['required']">
+      Power is required.
+    </div>
+  </div>
+  <div class="d-flex flex-column align-items-center justify-content-center">
+    <button type="submit" class="btn btn-primary mb-4 w-100" [disabled]="!formGroup.valid">Add</button>
+  </div>
+</form>

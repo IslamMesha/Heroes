@@ -1,0 +1,24 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
+      <th scope="col" sortable="power" (sort)="onSort($event)">Power</th>
+      <th scope="col" sortable="rate" (sort)="onSort($event)">Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let hero of heroes">
+      <td scope="row">{{ hero.id }}</td>
+      <td>
+        <ngb-highlight [result]="hero.name" [term]="filter.value"></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight [result]="hero.power" [term]="filter.value"></ngb-highlight>
+      </td>
+      <td>
+        <ngb-rating (rateChange)="onRateChange(hero.id, $event)" [(rate)]="hero.rate"></ngb-rating>
+      </td>
+    </tr>
+  </tbody>
+</table>
