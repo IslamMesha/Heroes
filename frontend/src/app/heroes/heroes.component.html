@@ -1,0 +1,31 @@
+<form>
+  <div class="mb-3 row">
+    <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Full text search:</label>
+    <div class="col-xs-3 col-sm-auto">
+      <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter"/>
+    </div>
+  </div>
+</form>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
+    <th scope="col" sortable="power" (sort)="onSort($event)">Power</th>
+    <th scope="col" sortable="rate" (sort)="onSort($event)">Rate</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let hero of heroes">
+    <th scope="row">{{ hero.id }}</th>
+    <td>
+      <ngb-highlight [result]="hero.name" [term]="filter.value"></ngb-highlight>
+    </td>
+    <ngb-highlight [result]="hero.power" [term]="filter.value"></ngb-highlight>
+    <td>
+      <ngb-rating (rateChange)="onRateChange(hero.id, $event)" [formControl]="rate" [(rate)]="hero.rate"></ngb-rating>
+    </td>
+  </tr>
+  </tbody>
+</table>
