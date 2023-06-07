@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Hero, HeroConfig } from '../shared/models/hero.model';
 
 @Injectable({
@@ -28,9 +28,13 @@ export class HeroesService {
       );
   }
 
-  submitRate(hero: Hero): Observable<boolean> {
+  submitRate(data: Hero): Observable<boolean> {
+    // Add auth token to the request headers
+    const headers = new HttpHeaders({
+      Authorization: `JWT ${localStorage.getItem("authToken")!.replace(/['"]+/g, '')}`
+    });
     return this.http
-      .put<boolean>(`${this.baseUrl}/api/heroes/submitRate`, hero)
+      .post<boolean>(`${this.baseUrl}/api/rates/`, {"hero": data.id, "rate": data.rate}, {headers: headers})
       .pipe(
         catchError((error) => {
           console.error('Failed to load heroes:', error);
